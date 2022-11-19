@@ -19,18 +19,14 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
     FirebaseDatabase database;
+    DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference();
 
-        Map<String,String> user = new HashMap<>();
-        user.put("Name","Test name");
-        user.put("Email","test@email.com");
-
-        ref.setValue(user);
+        RegistrationActivity registrationActivity = new RegistrationActivity();
+        registrationActivity.writeNewUser("1","admin","admin@email.com");
     }
 }
