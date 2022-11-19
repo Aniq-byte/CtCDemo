@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +32,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         switchToLoginActivity();
+
+
+        Button loginButton = findViewById(R.id.button_logout);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                FirebaseAuth.getInstance().signOut();
+                switchToLoginActivity();
+
+            }
+
+        });
     }
 
     protected void switchToLoginActivity() {
