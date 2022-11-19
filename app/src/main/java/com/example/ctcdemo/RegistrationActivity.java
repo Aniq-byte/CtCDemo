@@ -78,7 +78,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                         } else {
 
-                            Toast.makeText(RegistrationActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegistrationActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
 
                         }
                     }
