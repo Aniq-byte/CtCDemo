@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button mapButton = findViewById(R.id.mapView);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        mapButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
