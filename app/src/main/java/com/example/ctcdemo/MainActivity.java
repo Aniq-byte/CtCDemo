@@ -47,11 +47,32 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        Button mapButton = findViewById(R.id.mapView);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                switchToMapsActivity();
+
+            }
+
+        });
+
     }
 
     protected void switchToLoginActivity() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    protected void switchToMapsActivity() {
+
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
+
     }
 
 }
