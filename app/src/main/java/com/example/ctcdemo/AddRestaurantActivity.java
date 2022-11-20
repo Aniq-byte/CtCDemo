@@ -34,7 +34,7 @@ public class AddRestaurantActivity extends AppCompatActivity implements View.OnC
         String name = getName();
         String city = getCity();
         Boolean hasHealthyOptions = getHasHealthyOptions();
-        Boolean hasVeganOptions = getHasHealthyOptions();
+        Boolean hasVeganOptions = getHasVeganOptions();
         double latitude = getLatitude();
         double longitude = getLongitude();
 
@@ -75,7 +75,17 @@ public class AddRestaurantActivity extends AppCompatActivity implements View.OnC
 
         CheckBox hasHealthyOptions = findViewById(R.id.hasHealthyOptions);
 
-        return Boolean.parseBoolean(hasHealthyOptions.getText().toString().trim());
+
+        return hasHealthyOptions.isChecked();
+
+    }
+
+    protected Boolean getHasVeganOptions() {
+
+        CheckBox hasVeganOptions = findViewById(R.id.hasVeganOptions);
+
+
+        return hasVeganOptions.isChecked();
 
     }
 

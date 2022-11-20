@@ -10,6 +10,9 @@ public class Restaurant {
     public double longitude;
 
 
+    public Restaurant() {
+
+    }
 
     public Restaurant(String name, String city, Boolean hasHealthyOptions, Boolean hasVeganOptions,
                       double latitude, double longitude) {

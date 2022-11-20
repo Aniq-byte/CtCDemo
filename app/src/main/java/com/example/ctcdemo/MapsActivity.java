@@ -80,7 +80,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
-
     }
 
     private void getNearByFoodBanks() {
@@ -105,11 +104,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         public void onMapReady(GoogleMap googleMap) {
 
 
+                            /*
                             LatLng latlng = new LatLng(location.getLatitude(),location.getLongitude());
                             MarkerOptions markerOptions = new MarkerOptions().position(latlng).title("You are here");
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,14));
                             googleMap.addMarker(markerOptions).showInfoWindow();
+
+                             */
                             showRestaurants("Halifax",googleMap);
+
+                            LatLng halifaxLat = new LatLng(44.651070, -63.582687);
+                            MarkerOptions markerOptions = new MarkerOptions().position(halifaxLat).title("You are here");
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(halifaxLat,14));
+                            googleMap.addMarker(markerOptions).showInfoWindow();
 
                         }
 
@@ -165,7 +172,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void showRestaurants(String city, GoogleMap googleMap) {
-        DatabaseReference restaurantNode = firebaseDatabase.getReference("restaurants").child(city);
+        DatabaseReference restaurantNode = firebaseDatabase.getReference("restaurant").child(city);
+
         restaurantNode.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
