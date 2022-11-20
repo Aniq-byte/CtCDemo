@@ -5,10 +5,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -22,6 +24,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.ctcdemo.databinding.ActivityMapsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -31,12 +39,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private SupportMapFragment mapFragment;
     private FusedLocationProviderClient client;
-
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -57,6 +66,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
 
         }
+
+        Button addRestaurantButton = findViewById(R.id.addNewRestaurant);
+
+        addRestaurantButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                switchToAddRestaurantActivity();
+
+            }
+
+        });
 
 
     }
@@ -87,6 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             MarkerOptions markerOptions = new MarkerOptions().position(latlng).title("You are here");
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,14));
                             googleMap.addMarker(markerOptions).showInfoWindow();
+                            showRestaurants("Halifax",googleMap);
 
                         }
 
@@ -137,6 +160,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+    }
+
+
+    public void showRestaurants(String city, GoogleMap googleMap) {
+        DatabaseReference restaurantNode = firebaseDatabase.getReference("restaurants").child(city);
+        restaurantNode.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot adSnapshot: snapshot.getChildren()) {
+                    Restaurant restaurant = adSnapshot.getValue(Restaurant.class);
+                    LatLng latLng = new LatLng(restaurant.latitude,restaurant.longitude);
+                    googleMap.addMarker(new MarkerOptions().position(latLng).title("Marker on " + restaurant.name));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    protected void switchToAddRestaurantActivity() {
+
+        Intent intent = new Intent(MapsActivity.this, AddRestaurantActivity.class);
+        startActivity(intent);
 
     }
 
