@@ -3,66 +3,102 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background">
 
     <Button
         android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="562dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="109dp"
         android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:strokeColor="@color/dark_green"
+        app:strokeWidth="4dp" />
 
     <EditText
         android:id="@+id/ZIPCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ZIPCode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.348" />
+        android:layout_width="166dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="174dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="515dp"
+        android:hint="ZipCode"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="59dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginBottom="440dp"
-        android:text="name"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="603dp"
+        android:hint="Restaurant Name"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <EditText
         android:id="@+id/city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="city"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintVertical_bias="0.118" />
+        android:layout_width="161dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="277dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="410dp"
+        android:hint="City"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <CheckBox
         android:id="@+id/hasHealthyOptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hasHealthyOptions"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintEnd_toStartOf="@+id/hasVeganOptions"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="374dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="309dp"
+        android:text="Has Healthy Options"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <CheckBox
         android:id="@+id/hasVeganOptions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hasVeganOptions"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/city" />
+        android:layout_width="161dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="459dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="222dp"
+        android:text="Has Vegan Options"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
