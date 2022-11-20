@@ -6,8 +6,8 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="162dp"
+        android:layout_height="57dp"
         android:layout_weight="1"
         android:text="Button" />
 
@@ -30,7 +30,7 @@
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="99dp"
         android:layout_weight="1"
         android:text="Button" />
 
