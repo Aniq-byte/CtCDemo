@@ -8,6 +8,7 @@ public class Restaurant {
     public Boolean hasVeganOptions;
     public double latitude;
     public double longitude;
+    public String ZIPCode;
 
 
     public Restaurant() {
@@ -15,14 +16,15 @@ public class Restaurant {
     }
 
     public Restaurant(String name, String city, Boolean hasHealthyOptions, Boolean hasVeganOptions,
-                      double latitude, double longitude) {
+                      double latitude, double longitude, String ZIPCode) {
 
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.name = name;
         this.city = city;
         this.hasHealthyOptions = hasHealthyOptions;
         this.hasVeganOptions = hasVeganOptions;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.ZIPCode = ZIPCode;
 
     }
 

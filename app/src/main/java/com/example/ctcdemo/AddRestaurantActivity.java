@@ -1,26 +1,34 @@
 package com.example.ctcdemo;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
+import java.util.List;
+
 public class AddRestaurantActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     FirebaseDatabase firebaseDatabase;
+    private Geocoder geocoder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        geocoder = new Geocoder(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_restaurant);
 
@@ -35,10 +43,26 @@ public class AddRestaurantActivity extends AppCompatActivity implements View.OnC
         String city = getCity();
         Boolean hasHealthyOptions = getHasHealthyOptions();
         Boolean hasVeganOptions = getHasVeganOptions();
-        double latitude = getLatitude();
-        double longitude = getLongitude();
-
-        Restaurant restaurant = new Restaurant(name,city,hasHealthyOptions,hasVeganOptions,latitude,longitude);
+        String ZIPCode = getZIPCode();
+        double latitude = 0;
+        double longitude = 0;
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(ZIPCode, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                // Use the address as needed
+                latitude = address.getLatitude();
+                longitude = address.getLongitude();
+            } else {
+                // Display appropriate message when Geocoder services are not available
+                Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
+            }
+        } catch (IOException e) {
+            // handle exception
+        }
+        Toast.makeText(this,String.valueOf(latitude),Toast.LENGTH_LONG).show();
+        Toast.makeText(this,String.valueOf(longitude),Toast.LENGTH_LONG).show();
+        Restaurant restaurant = new Restaurant(name,city,hasHealthyOptions,hasVeganOptions,latitude,longitude,ZIPCode);
         firebaseDatabase.getReference("restaurant").child(city).child(name).setValue(restaurant);
         switchToMapsActivity();
     }
@@ -57,19 +81,13 @@ public class AddRestaurantActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    protected double getLatitude() {
+    protected String getZIPCode() {
 
-        EditText latitude = findViewById(R.id.latitude);
-        return Double.parseDouble(latitude.getText().toString().trim());
-
-    }
-
-    protected double getLongitude() {
-
-        EditText longitude = findViewById(R.id.longitude);
-        return Double.parseDouble(longitude.getText().toString().trim());
+        EditText ZIPCode = findViewById(R.id.ZIPCode);
+        return ZIPCode.getText().toString().trim();
 
     }
+
 
     protected Boolean getHasHealthyOptions() {
 
